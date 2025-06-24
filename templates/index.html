@@ -1,0 +1,50 @@
+  {% extends 'base.html' %}
+  {% block title %}Home {% endblock title %}
+  {% block body %}
+
+    <div class="container">
+        <form class="my-5" action="/" method="POST">
+            <h2>Add to do</h2>
+            <div class="mb-3">
+              <label for="title" class="form-label">To do title</label>
+              <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="desc" class="form-label">to do Description</label>
+              <input type="text" class="form-control" name="desc" id="desc">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>  
+
+          {% if alltodo| length==0 %}
+            <h2>No records</h2>
+          {% else %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Sr.no</th>
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Time</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for todo in alltodo %}
+              <tr>
+                <th scope="row">{{loop.index}}</th>
+                <th scope="row">{{todo.sro}}</th>
+                <td>{{todo.title}}</td>
+                <td>{{todo.desc}}</td>
+                <td>@{{todo.date_created}}</td>
+                <td><a href="/update/{{todo.sro}}" type="button" class="btn btn-primary btn-sm">Update</a></td>
+                <td><a href="/delete/{{todo.sro}}" type="button" class="btn btn-primary btn-sm">Delete</a></td>
+              </tr>
+              {% endfor %}
+              {% endif %}
+            </tbody>
+          </table>
+    </div>
+</body>
+{% endblock body %}
